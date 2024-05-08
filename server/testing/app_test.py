@@ -73,12 +73,14 @@ class TestApp:
 
             # check if logged in
             with client.session_transaction() as session:
-                assert(session['user_id'])
+                print("Before logout - session:", session)
+                assert session['user_id']
 
             # check if logged out
             response = client.delete('/logout')
             with client.session_transaction() as session:
-                assert(not session.get('user_id'))
+                print("After logout - session:", session)
+                assert not session.get('user_id')
             
 
 
